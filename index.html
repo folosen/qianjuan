@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    #iframe_box{
+        width: 100%;
+        height: auto;
+    }
+    #iframe_box iframe{
+        width:100px;
+        height:100px;
+        display: inline-block;
+    }
+</style>
+<body>
+    <input type="text" id="add_url"><input type="button" id="add_btn" value="run"><input type="button" id="stop_btn" value="stop">
+    <div id="iframe_box">
+
+    </div>
+</body>
+<script src="jquery.js"></script>
+<script>
+    var timeT
+    $("#add_btn").click(function(){
+        timeT = setInterval(addIframe,10);
+    });
+    
+    $("#stop_btn").click(function(){
+        clearInterval(timeT);
+    });
+    function addIframe(){
+        var iframeObj =document.createElement("iframe");
+        iframeObj.src = $("#add_url").val();
+        $("#iframe_box").append(iframeObj);
+        iframeObj.onload = function(){
+            $(iframeObj).remove();
+        }
+    };
+</script>
+</html>
